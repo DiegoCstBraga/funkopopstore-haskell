@@ -1,5 +1,8 @@
 Produto
     nome Text
+    franquia Text
+    desc Text
+    serialNumber Int
     preco Double
     deriving Show
 
