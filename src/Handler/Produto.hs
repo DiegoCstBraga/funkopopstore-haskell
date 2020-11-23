@@ -123,7 +123,7 @@ auxProdutoR rt produto = do
                      $maybe email <- sess
                         <div class="conta">
                            <p style="margin=0 1rem 0 0;">
-                              Logado como: #{email}
+                              Login efetuado como: #{email}
                            <form method=post action=@{SairR}>
                               <input type="submit" value="Sair">
                      $nothing
@@ -134,7 +134,7 @@ auxProdutoR rt produto = do
                            Entrar
                      
                      <a class="aButton" href=@{ProdutoR}>
-                        Listar Produtos
+                        Listar Funkos
 
             <main>
                <h2>
