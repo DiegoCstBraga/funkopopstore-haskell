@@ -37,6 +37,51 @@ auxProdutoR :: Route App -> Maybe Produto -> Handler Html
 auxProdutoR rt produto = do
   (widget, _) <- generateFormPost (formProduto produto)
   defaultLayout $ do
+    addStylesheet (StaticR css_bootstrap_css)
+    sess <- lookupSession "_EMAIL"
+    toWidgetHead [lucius| 
+    header {
+      display: flex;
+      flex-diretcion: row;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #202020;
+      padding: 1rem 0 1rem 1rem;
+    }
+    
+    header img {
+      width: auto;
+      height: 100px;
+    }
+
+    .direita{
+      color: #f0f0f0;
+      font-size: 2rem;
+
+      background-color: blue;
+    }
+
+    .conta{
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      color: #f0f0f0;
+      font-size: 2rem;
+
+      background-color: red;
+    }
+
+    header a{
+      margin-right: 1rem;
+      font-size: 2rem;
+      color: #f0f0f0;
+    }
+
+    input {
+      color: #000;
+    }
+    |]
     [whamlet|
 
             <h1>
