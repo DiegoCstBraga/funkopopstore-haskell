@@ -39,58 +39,111 @@ auxProdutoR rt produto = do
   defaultLayout $ do
     addStylesheet (StaticR css_bootstrap_css)
     sess <- lookupSession "_EMAIL"
-    toWidgetHead [lucius| 
-    header {
-      display: flex;
-      flex-diretcion: row;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #202020;
-      padding: 1rem 0 1rem 1rem;
-    }
-    
-    header img {
-      width: auto;
-      height: 100px;
-    }
+    toWidgetHead
+      [lucius| 
 
-    .direita{
-      color: #f0f0f0;
-      font-size: 2rem;
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
 
-      background-color: blue;
-    }
+         * {
+            font-family: 'Roboto', sans-serif;
+         }
 
-    .conta{
-      display: flex;
-      flex-direction: row;
-      align-items: center;
+         body{
+            margin: 0 auto;
+         }
 
-      color: #f0f0f0;
-      font-size: 2rem;
+         header { 
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #202020;
+            padding: 1rem 0 1rem 1rem;
+         }
 
-      background-color: red;
-    }
+         header img {
+            width: auto;
+            height: 100px;
+         }
 
-    header a{
-      margin-right: 1rem;
-      font-size: 2rem;
-      color: #f0f0f0;
-    }
+         .direita{
+            display: flex;
+            flex-direction: row;
 
-    input {
-      color: #000;
-    }
+            margin-right: 1rem;
+
+            color: #f0f0f0;
+            font-size: 2rem;
+
+         }
+
+         .conta{
+            display: flex;
+            flex-direction: row;
+            align-items: center;         
+
+         }
+
+         header a, p{
+            margin: 0 1rem 0 0;
+            font-size: 2rem;
+            color: #f0f0f0
+         }
+
+         input{
+            color: #000;
+            margin-right: 1rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background-color: #cfcfcf;
+            border: hidden;
+            outline: none;
+         }
+
+         .aButton{
+            margin: 0 1rem 0 0;
+            font-size: 2rem;
+            padding: 0.5rem;
+            color: #f0f0f0;
+            border-radius: 0.5rem;
+            background-color: #f64668;
+            border: hidden;
+            outline: none;
+         }
     |]
     [whamlet|
+         <body>
+            <header>
+               <div class="esquerda">
+                  <a class="home" href=@{HomeR}>
+                     <img src="https://i.imgur.com/c6K3Xyj.png" alt="logo">
 
-            <h1>
+               <div>
+                  <nav class="direita">
+                     $maybe email <- sess
+                        <div class="conta">
+                           <p style="margin=0 1rem 0 0;">
+                              Logado como: #{email}
+                           <form method=post action=@{SairR}>
+                              <input type="submit" value="Sair">
+                     $nothing
+                        <a class="aButton" href=@{UsuarioR}>
+                           Criar Conta 
+                  
+                        <a class="aButton" href=@{EntrarR}>
+                           Entrar
+                     
+                     <a class="aButton" href=@{ProdutoR}>
+                        Listar Produtos
+
+            <main>
+               <h2>
                  CADASTRO DE PRODUTO
             
-            <form action=@{rt} method=post>
-                ^{widget}
-                <input type="submit" value="Cadastrar">
-        |]
+               <form action=@{rt} method=post>
+                  ^{widget}
+                  <input type="submit" value="Cadastrar">
+      |]
 
 getProdutoR :: Handler Html
 getProdutoR = auxProdutoR ProdutoR Nothing
@@ -109,65 +162,289 @@ getDescR :: ProdutoId -> Handler Html
 getDescR pid = do
   produto <- runDB $ get404 pid
   (widget, _) <- generateFormPost formQt
-  defaultLayout
+  defaultLayout $ do
+    addStylesheet (StaticR css_bootstrap_css)
+    sess <- lookupSession "_EMAIL"
+    toWidgetHead
+      [lucius|
+
+            @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+            * {
+               font-family: 'Roboto', sans-serif;
+            }
+
+            body{
+               margin: 0 auto;
+            }
+
+            header { 
+               display: flex;
+               flex-direction: row;
+               justify-content: space-between;
+               align-items: center;
+               background-color: #202020;
+               padding: 1rem 0 1rem 1rem;
+            }
+
+            header img {
+               width: auto;
+               height: 100px;
+            }
+
+            .direita{
+               display: flex;
+               flex-direction: row;
+
+               margin-right: 1rem;
+
+               color: #f0f0f0;
+               font-size: 2rem;
+
+            }
+
+            .conta{
+               display: flex;
+               flex-direction: row;
+               align-items: center;         
+
+            }
+
+            header a, p{
+               margin: 0 1rem 0 0;
+               font-size: 2rem;
+               color: #f0f0f0
+            }
+
+            input{
+               color: #000;
+               margin-right: 1rem;
+               padding: 0.5rem;
+               border-radius: 0.5rem;
+               background-color: #cfcfcf;
+               border: hidden;
+               outline: none;
+            }
+
+            .aButton{
+               margin: 0 1rem 0 0;
+               font-size: 2rem;
+               padding: 0.5rem;
+               color: #f0f0f0;
+               border-radius: 0.5rem;
+               background-color: #f64668;
+               border: hidden;
+               outline: none;
+            }
+            
+          |]
     [whamlet|
 
-        <h1>
-            Nome: #{produtoNome produto}
-        
-        <h2>
-            Franquia: #{produtoFranquia produto}
+         <body>
+            <header>
+               <div class="esquerda">
+                  <a class="home" href=@{HomeR}>
+                     <img src="https://i.imgur.com/c6K3Xyj.png" alt="logo">
 
-        <h2>
-            Descrição: #{produtoDesc produto}
-        
-        <h2>
-            Número de série: #{produtoSerialNumber produto}
+               <div>
+                  <nav class="direita">
+                     $maybe email <- sess
+                        <div class="conta">
+                           <p style="margin=0 1rem 0 0;">
+                              Logado como: #{email}
+                           <form method=post action=@{SairR}>
+                              <input type="submit" value="Sair">
+                     $nothing
+                        <a class="aButton" href=@{UsuarioR}>
+                           Criar Conta 
+                  
+                        <a class="aButton" href=@{EntrarR}>
+                           Entrar
+                     
+                     <a class="aButton" href=@{ProdutoR}>
+                        Listar Produtos
 
-        <h2>
-            Preço: #{produtoPreco produto}
-        
-        <form action=@{ComprarR pid} method=post>
-            ^{widget}
-            <input type="submit" value="Comprar">
-    |]
+            <main>
+               <h2>
+                  CADASTRO PAGE
+
+               <h1>
+                  COMPRANDO PRODUTO
+
+               <h2>
+                  Nome: #{produtoNome produto}
+               
+               <h2>
+                  Franquia: #{produtoFranquia produto}
+
+               <h2>
+                  Descrição: #{produtoDesc produto}
+               
+               <h2>
+                  Número de série: #{produtoSerialNumber produto}
+
+               <h2>
+                  Preço: #{produtoPreco produto}
+               
+               <form action=@{ComprarR pid} method=post>
+                  ^{widget}
+                  <input type="submit" value="Comprar">
+      |]
 
 getListProdR :: Handler Html
 getListProdR = do
   -- produtos :: [Entity Produto]
   produtos <- runDB $ selectList [] [Desc ProdutoPreco]
-  defaultLayout
+  defaultLayout $ do
+    addStylesheet (StaticR css_bootstrap_css)
+    sess <- lookupSession "_EMAIL"
+    toWidgetHead
+      [lucius|
+
+
+         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+         * {
+            font-family: 'Roboto', sans-serif;
+         }
+
+         body{
+            margin: 0 auto;
+         }
+
+         header { 
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #202020;
+            padding: 1rem 0 1rem 1rem;
+         }
+
+         header img {
+            width: auto;
+            height: 100px;
+         }
+
+         .direita{
+            display: flex;
+            flex-direction: row;
+
+            margin-right: 1rem;
+
+            color: #f0f0f0;
+            font-size: 2rem;
+
+         }
+
+         .conta{
+            display: flex;
+            flex-direction: row;
+            align-items: center;         
+
+         }
+
+         header a, p{
+            margin: 0 1rem 0 0;
+            font-size: 2rem;
+            color: #f0f0f0
+         }
+
+         input{
+            color: #000;
+            margin-right: 1rem;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background-color: #cfcfcf;
+            border: hidden;
+            outline: none;
+         }
+
+         .aButton{
+            margin: 0 1rem 0 0;
+            font-size: 2rem;
+            padding: 0.5rem;
+            color: #f0f0f0;
+            border-radius: 0.5rem;
+            background-color: #f64668;
+            border: hidden;
+            outline: none;
+         }
+      |]
     [whamlet|
 
-            <table>
-                <thead>
-                    <tr>
-                        <th> 
-                            Nome
-                        
+         <body>
+            <header>
+               <div class="esquerda">
+                  <a class="home" href=@{HomeR}>
+                     <img src="https://i.imgur.com/c6K3Xyj.png" alt="logo">
+
+               <div>
+                  <nav class="direita">
+                     $maybe email <- sess
+                        <div class="conta">
+                           <p style="margin=0 1rem 0 0;">
+                              Logado como: #{email}
+                           <form method=post action=@{SairR}>
+                              <input type="submit" value="Sair">
+                     $nothing
+                        <a class="aButton" href=@{UsuarioR}>
+                           Criar Conta 
+                  
+                        <a class="aButton" href=@{EntrarR}>
+                           Entrar
+                     
+                     <a class="aButton" href=@{ProdutoR}>
+                        Listar Produtos
+
+            <main>
+               <h2>
+                  LISTANDO FUNKOS PAGE
+
+               <table>
+                  <thead>
+                     <tr>
                         <th>
-                            Produto
-                        
+                           Nome
+
                         <th>
-                        
+                           Franquia
+
                         <th>
-                <tbody>
-                    $forall Entity pid prod <- produtos
+                           Serial Number
+
+                        <th>
+                           Preço
+
+                  <tbody>
+                     $forall Entity pid prod <- produtos
                         <tr>
-                            <td>
-                                <a href=@{DescR pid}>
-                                    #{produtoNome prod}
-                            
-                            <td>
-                                #{produtoPreco prod}
-                            
-                            <th>
-                                <a href=@{UpdProdR pid}>
-                                    Editar
-                            <th>
-                                <form action=@{DelProdR pid} method=post>
-                                    <input type="submit" value="X">
-    |]
+                           <td>
+                              <a href=@{DescR pid}>
+                                 #{produtoNome prod}
+                           
+                           <td>
+                              #{produtoFranquia prod}
+                           
+                           <td>
+                              #{produtoSerialNumber prod}
+                           
+                           <td>
+                              #{produtoPreco prod}
+
+                           <th>
+                              <a href=@{UpdProdR pid}>
+                                 Editar
+                           <th>
+                              <form action=@{DelProdR pid} method=post>
+                                 <input type="submit" value="X">
+      |]
+
+--   defaultLayout
+--     [whamlet|
+
+--
+--     |]
 
 getUpdProdR :: ProdutoId -> Handler Html
 getUpdProdR pid = do

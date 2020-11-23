@@ -27,10 +27,14 @@ getEntrarR = do
     sess <- lookupSession "_EMAIL"
     toWidgetHead
       [lucius|
-         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
 
          * {
             font-family: 'Roboto', sans-serif;
+         }
+
+         body{
+            margin: 0 auto;
          }
 
          header { 
@@ -76,8 +80,9 @@ getEntrarR = do
             margin-right: 1rem;
             padding: 0.5rem;
             border-radius: 0.5rem;
-            background-color: #f64668;
-            border-style: none;
+            background-color: #cfcfcf;
+            border: hidden;
+            outline: none;
          }
 
          .aButton{
@@ -87,37 +92,38 @@ getEntrarR = do
             color: #f0f0f0;
             border-radius: 0.5rem;
             background-color: #f64668;
-            border-style: none;
+            border: hidden;
+            outline: none;
          }
       |]
     [whamlet|
          <body>
-         <header>
-            <div class="esquerda">
-               <a class="home" href=@{HomeR}>
-                  <img src="https://i.imgur.com/c6K3Xyj.png" alt="logo">
+            <header>
+               <div class="esquerda">
+                  <a class="home" href=@{HomeR}>
+                     <img src="https://i.imgur.com/c6K3Xyj.png" alt="logo">
 
-            <div>
-               <nav class="direita">
-                  $maybe email <- sess
-                     <div class="conta">
-                        <p style="margin=0 1rem 0 0;">
-                           Logado como: #{email}
-                        <form method=post action=@{SairR}>
-                           <input type="submit" value="Sair">
-                  $nothing
-                     <a class="aButton" href=@{UsuarioR}>
-                        Criar Conta 
-               
-                     <a class="aButton" href=@{EntrarR}>
-                        Entrar
+               <div>
+                  <nav class="direita">
+                     $maybe email <- sess
+                        <div class="conta">
+                           <p style="margin=0 1rem 0 0;">
+                              Logado como: #{email}
+                           <form method=post action=@{SairR}>
+                              <input type="submit" value="Sair">
+                     $nothing
+                        <a class="aButton" href=@{UsuarioR}>
+                           Criar Conta 
                   
-                  <a class="aButton" href=@{ProdutoR}>
-                     Listar Produtos
+                        <a class="aButton" href=@{EntrarR}>
+                           Entrar
+                     
+                     <a class="aButton" href=@{ProdutoR}>
+                        Listar Produtos
 
-         <main>
-            <h2>
-               LOGIN PAGE
+            <main>
+               <h2>
+                  LOGIN PAGE
       |]
     geraForm EntrarR "ENTRAR" "Login" msg widget
 
