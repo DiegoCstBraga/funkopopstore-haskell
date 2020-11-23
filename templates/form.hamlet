@@ -1,10 +1,10 @@
 $maybe mensa <- msg 
-    <div>
-        ^{mensa}
+   <div>
+      ^{mensa}
             
 <h1>
-    #{titulo}
+   #{titulo}
             
 <form method=post action=@{rt}>
-    ^{widget}
-    <input type="submit" value=#{btn}>
+   ^{widget}
+   <input type="submit" value=#{btn}>
