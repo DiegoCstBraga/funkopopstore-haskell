@@ -82,7 +82,7 @@ getUsuarioR = do
 
          input{
             color: #000;
-            margin-right: 1rem;
+            margin: 1rem 0;
             padding: 0.5rem;
             border-radius: 0.5rem;
             background-color: #cfcfcf;
@@ -114,19 +114,22 @@ getUsuarioR = do
                   <nav class="direita">
                      $maybe email <- sess
                         <div class="conta">
-                           <p style="margin=0 1rem 0 0;">
+                           <p">
                               Logado como: #{email}
                            <form method=post action=@{SairR}>
-                              <input type="submit" value="Sair">
+                              <input class="aButton" type="submit" value="Sair">
                      $nothing
                         <a class="aButton" href=@{UsuarioR}>
                            Criar Conta 
                   
                         <a class="aButton" href=@{EntrarR}>
                            Entrar
-                     
-                     <a class="aButton" href=@{ProdutoR}>
-                        Listar Produtos
+
+                     <a class="aButton" href=@{ListProdR}>
+                        Ver Funkos 
+
+                     <a class="aButton" href=@{ListCompraR}>
+                        Minhas Compras 
 
             <main>
                <h2>

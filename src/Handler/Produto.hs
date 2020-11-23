@@ -92,7 +92,7 @@ auxProdutoR rt produto = do
 
          input{
             color: #000;
-            margin-right: 1rem;
+            margin: 1rem 0;
             padding: 0.5rem;
             border-radius: 0.5rem;
             background-color: #cfcfcf;
@@ -122,10 +122,10 @@ auxProdutoR rt produto = do
                   <nav class="direita">
                      $maybe email <- sess
                         <div class="conta">
-                           <p style="margin=0 1rem 0 0;">
+                           <p>
                               Login efetuado como: #{email}
                            <form method=post action=@{SairR}>
-                              <input type="submit" value="Sair">
+                              <input class="aButton" type="submit" value="Sair">
                      $nothing
                         <a class="aButton" href=@{UsuarioR}>
                            Criar Conta 
@@ -133,16 +133,19 @@ auxProdutoR rt produto = do
                         <a class="aButton" href=@{EntrarR}>
                            Entrar
                      
-                     <a class="aButton" href=@{ProdutoR}>
-                        Listar Funkos
+                     <a class="aButton" href=@{ListProdR}>
+                        Ver Funkos 
+
+                     <a class="aButton" href=@{ListCompraR}>
+                        Minhas Compras 
 
             <main>
                <h2>
-                 CADASTRO DE PRODUTO
+                 Mexendo no produto
             
                <form action=@{rt} method=post>
                   ^{widget}
-                  <input type="submit" value="Cadastrar">
+                  <input type="submit" value="Registrar">
       |]
 
 getProdutoR :: Handler Html
@@ -218,7 +221,7 @@ getDescR pid = do
 
             input{
                color: #000;
-               margin-right: 1rem;
+               margin: 1rem 0;
                padding: 0.5rem;
                border-radius: 0.5rem;
                background-color: #cfcfcf;
@@ -250,10 +253,10 @@ getDescR pid = do
                   <nav class="direita">
                      $maybe email <- sess
                         <div class="conta">
-                           <p style="margin=0 1rem 0 0;">
+                           <p>
                               Logado como: #{email}
                            <form method=post action=@{SairR}>
-                              <input type="submit" value="Sair">
+                              <input class="aButton" type="submit" value="Sair">
                      $nothing
                         <a class="aButton" href=@{UsuarioR}>
                            Criar Conta 
@@ -261,13 +264,13 @@ getDescR pid = do
                         <a class="aButton" href=@{EntrarR}>
                            Entrar
                      
-                     <a class="aButton" href=@{ProdutoR}>
-                        Listar Produtos
+                     <a class="aButton" href=@{ListProdR}>
+                        Ver Funkos 
+
+                     <a class="aButton" href=@{ListCompraR}>
+                        Minhas Compras 
 
             <main>
-               <h2>
-                  CADASTRO PAGE
-
                <h1>
                   COMPRANDO PRODUTO
 
@@ -352,7 +355,6 @@ getListProdR = do
 
          input{
             color: #000;
-            margin-right: 1rem;
             padding: 0.5rem;
             border-radius: 0.5rem;
             background-color: #cfcfcf;
@@ -413,10 +415,10 @@ getListProdR = do
                   <nav class="direita">
                      $maybe email <- sess
                         <div class="conta">
-                           <p style="margin=0 1rem 0 0;">
+                           <p>
                               Logado como: #{email}
                            <form method=post action=@{SairR}>
-                              <input type="submit" value="Sair">
+                              <input class="aButton" type="submit" value="Sair">
                      $nothing
                         <a class="aButton" href=@{UsuarioR}>
                            Criar Conta 
@@ -424,12 +426,15 @@ getListProdR = do
                         <a class="aButton" href=@{EntrarR}>
                            Entrar
                      
-                     <a class="aButton" href=@{ProdutoR}>
-                        Listar Produtos
+                     <a class="aButton" href=@{ListProdR}>
+                        Ver Funkos 
+
+                     <a class="aButton" href=@{ListCompraR}>
+                        Minhas Compras 
 
             <main>
                <h2>
-                  LISTANDO FUNKOS PAGE
+                  Funkos disponíveis
 
                <div id=centralizado>
                   <table>

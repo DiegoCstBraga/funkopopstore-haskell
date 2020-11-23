@@ -66,14 +66,14 @@ getHomeR = defaultLayout $ do
       }
 
       input{
-         color: #000;
-         margin-right: 1rem;
-         padding: 0.5rem;
-         border-radius: 0.5rem;
-         background-color: #cfcfcf;
-         border: hidden;
-         outline: none;
-      }
+            color: #000;
+            margin: 1rem 0;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background-color: #cfcfcf;
+            border: hidden;
+            outline: none;
+         }
 
       .aButton{
          margin: 0 1rem 0 0;
@@ -116,12 +116,15 @@ getHomeR = defaultLayout $ do
                      <a class="aButton" href=@{EntrarR}>
                         Entrar
 
+                     <a class="aButton" href=@{ListCompraR}>
+                        Minhas Compras    
+
                      <a class="aButton" href=@{ProdutoR}>
                         Cadastrar Produtos
                   
 
          <main>
             <h2>
-               HOME PAGE    
+               Bem Vindo!    
                     
     |]
