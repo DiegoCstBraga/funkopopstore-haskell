@@ -370,6 +370,36 @@ getListProdR = do
             border: hidden;
             outline: none;
          }
+
+         main{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+         }
+
+         table {
+            border-collapse: collapse;
+            width: 100%;
+            border-width: 2px;
+         }
+
+         th {
+            background-color: #4CAF50;
+            color: white;
+         }
+
+         th, td {
+            padding: 15px;
+            text-align: center;
+         }
+
+         tr:hover {
+            background-color: #f5f5f5;
+         }
+
+         #centralizado{
+            width: 70%
+         }
       |]
     [whamlet|
 
@@ -401,43 +431,48 @@ getListProdR = do
                <h2>
                   LISTANDO FUNKOS PAGE
 
-               <table>
-                  <thead>
-                     <tr>
-                        <th>
-                           Nome
-
-                        <th>
-                           Franquia
-
-                        <th>
-                           Serial Number
-
-                        <th>
-                           Preço
-
-                  <tbody>
-                     $forall Entity pid prod <- produtos
+               <div id=centralizado>
+                  <table>
+                     <thead>
                         <tr>
-                           <td>
-                              <a href=@{DescR pid}>
-                                 #{produtoNome prod}
-                           
-                           <td>
-                              #{produtoFranquia prod}
-                           
-                           <td>
-                              #{produtoSerialNumber prod}
-                           
-                           <td>
-                              #{produtoPreco prod}
+                           <th>
+                              Nome
 
                            <th>
-                              <a href=@{UpdProdR pid}>
-                                 Editar
+                              Franquia
+
                            <th>
-                              <form action=@{DelProdR pid} method=post>
-                                 <input type="submit" value="X">
+                              Serial Number
+
+                           <th>
+                              Preço
+
+                           <th>
+
+                           <th>
+
+                     <tbody>
+                        $forall Entity pid prod <- produtos
+                           <tr>
+                              <td>
+                                 <a href=@{DescR pid}>
+                                    #{produtoNome prod}
+                              
+                              <td>
+                                 #{produtoFranquia prod}
+                              
+                              <td>
+                                 #{produtoSerialNumber prod}
+                              
+                              <td>
+                                 #{produtoPreco prod}
+
+                              <td>
+                                 <a href=@{UpdProdR pid}>
+                                    Editar
+                              <td>
+                                 <form action=@{DelProdR pid} method=post>
+                                    <input type="submit" value="X">
       |]
 
 --   defaultLayout
