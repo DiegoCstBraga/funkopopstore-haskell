@@ -115,7 +115,7 @@ auxProdutoR rt produto = do
          <body>
             <header>
                <div class="esquerda">
-                  <a class="home" href=@{HomeR}>
+                  <a class="home" href=@{AdminR}>
                      <img src="https://i.imgur.com/c6K3Xyj.png" alt="logo">
 
                <div>
@@ -123,7 +123,7 @@ auxProdutoR rt produto = do
                      $maybe email <- sess
                         <div class="conta">
                            <p>
-                              Login efetuado como: #{email}
+                              Logado como: #{email}
                            <form method=post action=@{SairR}>
                               <input class="aButton" type="submit" value="Sair">
                      $nothing
@@ -133,11 +133,11 @@ auxProdutoR rt produto = do
                         <a class="aButton" href=@{EntrarR}>
                            Entrar
                      
-                     <a class="aButton" href=@{ListProdR}>
-                        Ver Funkos 
-
-                     <a class="aButton" href=@{ListCompraR}>
-                        Minhas Compras 
+                     <a class="aButton" href=@{ListProdAdmR}>
+                        Listar Funkos
+                     
+                     <a class="aButton" href=@{ProdutoR}>
+                        Cadastrar Funkos 
 
             <main>
                <h2>
@@ -156,8 +156,8 @@ postProdutoR = do
   ((resp, _), _) <- runFormPost (formProduto Nothing)
   case resp of
     FormSuccess produto -> do
-      pid <- runDB $ insert produto
-      redirect (DescR pid)
+      runDB $ insert produto
+      redirect (ListProdAdmR)
     _ -> redirect HomeR
 
 -- SELECT * from produto where id = pid
@@ -265,7 +265,7 @@ getDescR pid = do
                            Entrar
                      
                      <a class="aButton" href=@{ListProdR}>
-                        Ver Funkos 
+                        Listar Funkos 
 
                      <a class="aButton" href=@{ListCompraR}>
                         Minhas Compras 
@@ -427,7 +427,7 @@ getListProdR = do
                            Entrar
                      
                      <a class="aButton" href=@{ListProdR}>
-                        Ver Funkos 
+                        Listar Funkos 
 
                      <a class="aButton" href=@{ListCompraR}>
                         Minhas Compras 
@@ -452,10 +452,6 @@ getListProdR = do
                            <th>
                               Preço
 
-                           <th>
-
-                           <th>
-
                      <tbody>
                         $forall Entity pid prod <- produtos
                            <tr>
@@ -472,9 +468,7 @@ getListProdR = do
                               <td>
                                  #{produtoPreco prod}
 
-
       |]
-
 
 getListProdAdmR :: Handler Html
 getListProdAdmR = do
@@ -590,7 +584,7 @@ getListProdAdmR = do
          <body>
             <header>
                <div class="esquerda">
-                  <a class="home" href=@{HomeR}>
+                  <a class="home" href=@{AdminR}>
                      <img src="https://i.imgur.com/c6K3Xyj.png" alt="logo">
 
                <div>
@@ -609,7 +603,10 @@ getListProdAdmR = do
                            Entrar
                      
                      <a class="aButton" href=@{ListProdAdmR}>
-                        Ver Funkos 
+                        Listar Funkos
+                     
+                     <a class="aButton" href=@{ProdutoR}>
+                        Cadastrar Funkos 
 
                    
 
@@ -641,8 +638,7 @@ getListProdAdmR = do
                         $forall Entity pid prod <- produtos
                            <tr>
                               <td>
-                                 <a href=@{DescR pid}>
-                                    #{produtoNome prod}
+                                 #{produtoNome prod}
                               
                               <td>
                                  #{produtoFranquia prod}
@@ -679,7 +675,7 @@ postUpdProdR pid = do
   case resp of
     FormSuccess novo -> do
       runDB $ replace pid novo
-      redirect (DescR pid)
+      redirect (ListProdAdmR)
     _ -> redirect HomeR
 
 postDelProdR :: ProdutoId -> Handler Html

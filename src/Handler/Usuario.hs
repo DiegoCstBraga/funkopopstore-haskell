@@ -114,7 +114,7 @@ getUsuarioR = do
                   <nav class="direita">
                      $maybe email <- sess
                         <div class="conta">
-                           <p">
+                           <p>
                               Logado como: #{email}
                            <form method=post action=@{SairR}>
                               <input class="aButton" type="submit" value="Sair">
@@ -126,7 +126,7 @@ getUsuarioR = do
                            Entrar
 
                      <a class="aButton" href=@{ListProdR}>
-                        Ver Funkos 
+                        Listar Funkos 
 
                      <a class="aButton" href=@{ListCompraR}>
                         Minhas Compras 

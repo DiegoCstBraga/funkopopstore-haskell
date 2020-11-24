@@ -95,33 +95,25 @@ getHomeR = defaultLayout $ do
                <a class="home" href=@{HomeR}>
                   <img src="https://i.imgur.com/c6K3Xyj.png" alt="logo">
 
-            <div>
-               <nav class="direita">
-                  $maybe email <- sess
+            <nav class="direita">
+               $maybe email <- sess
                      <div class="conta">
-                        <p style="margin=0 1rem 0 0;">
+                        <p>
                            Logado como: #{email}
                         <form method=post action=@{SairR}>
                            <input class="aButton" type="submit" value="Sair">
+                  <a class="aButton" href=@{ListProdR}>
+                     Listar Funkos 
 
-                        <a class="aButton" href=@{ListProdR}>
-                           Ver Funkos 
+                  <a class="aButton" href=@{ListCompraR}>
+                     Minhas Compras
 
-                        <a class="aButton" href=@{ListCompraR}>
-                           Minhas Compras 
-                  $nothing
-                     <a class="aButton" href=@{UsuarioR}>
-                        Criar Conta 
-               
-                     <a class="aButton" href=@{EntrarR}>
-                        Entrar
-
-                     <a class="aButton" href=@{ListCompraR}>
-                        Minhas Compras    
-
-                     <a class="aButton" href=@{ProdutoR}>
-                        Cadastrar Produtos
-                  
+               $nothing
+                  <a class="aButton" href=@{UsuarioR}>
+                     Criar Conta 
+            
+                  <a class="aButton" href=@{EntrarR}>
+                     Entrar                  
 
          <main>
             <h2>
