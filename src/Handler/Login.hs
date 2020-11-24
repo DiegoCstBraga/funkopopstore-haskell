@@ -185,7 +185,7 @@ getAdminR = defaultLayout $ do
          body{
             margin: 0 auto;
          }
-
+   
          header { 
             display: flex;
             flex-direction: row;
@@ -244,7 +244,19 @@ getAdminR = defaultLayout $ do
             border: hidden;
             outline: none;
          }
+
+          main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+         }
+         main img {
+            height: 394px;
+            width: auto;
+         }
       |]
+
   [whamlet|
 
 
@@ -279,6 +291,7 @@ getAdminR = defaultLayout $ do
          <main>
             <h2>
                Página do Admin
+            <img src="https://i.imgur.com/QgAlnIW.png" alt="AdminPage"> 
    |]
   toWidget
     [julius|

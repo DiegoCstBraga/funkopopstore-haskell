@@ -86,6 +86,13 @@ getHomeR = defaultLayout $ do
          outline: none;
       }
 
+       main {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+         }
+
    |]
   sess <- lookupSession "_EMAIL"
   [whamlet|
@@ -117,6 +124,7 @@ getHomeR = defaultLayout $ do
 
          <main>
             <h2>
-               Bem Vindo!    
+               Bem Vindo! 
+            <img src="https://i.imgur.com/DYedlAY.png" alt="colecaofunko">   
                     
     |]
