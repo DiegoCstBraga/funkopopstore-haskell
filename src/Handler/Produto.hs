@@ -472,6 +472,187 @@ getListProdR = do
                               <td>
                                  #{produtoPreco prod}
 
+
+      |]
+
+
+getListProdAdmR :: Handler Html
+getListProdAdmR = do
+  -- produtos :: [Entity Produto]
+  produtos <- runDB $ selectList [] [Desc ProdutoPreco]
+  defaultLayout $ do
+    addStylesheet (StaticR css_bootstrap_css)
+    sess <- lookupSession "_EMAIL"
+    toWidgetHead
+      [lucius|
+
+
+         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap');
+
+         * {
+            font-family: 'Roboto', sans-serif;
+         }
+
+         body{
+            margin: 0 auto;
+         }
+
+         header { 
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #202020;
+            padding: 1rem 0 1rem 1rem;
+         }
+
+         header img {
+            width: auto;
+            height: 100px;
+         }
+
+         .direita{
+            display: flex;
+            flex-direction: row;
+
+            margin-right: 1rem;
+
+            color: #f0f0f0;
+            font-size: 2rem;
+
+         }
+
+         .conta{
+            display: flex;
+            flex-direction: row;
+            align-items: center;         
+
+         }
+
+         header a, p{
+            margin: 0 1rem 0 0;
+            font-size: 2rem;
+            color: #f0f0f0
+         }
+
+         input{
+            color: #000;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            background-color: #cfcfcf;
+            border: hidden;
+            outline: none;
+         }
+
+         .aButton{
+            margin: 0 1rem 0 0;
+            font-size: 2rem;
+            padding: 0.5rem;
+            color: #f0f0f0;
+            border-radius: 0.5rem;
+            background-color: #f64668;
+            border: hidden;
+            outline: none;
+         }
+
+         main{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+         }
+
+         table {
+            border-collapse: collapse;
+            width: 100%;
+            border-width: 2px;
+         }
+
+         th {
+            background-color: #4CAF50;
+            color: white;
+         }
+
+         th, td {
+            padding: 15px;
+            text-align: center;
+         }
+
+         tr:hover {
+            background-color: #f5f5f5;
+         }
+
+         #centralizado{
+            width: 70%
+         }
+      |]
+    [whamlet|
+
+         <body>
+            <header>
+               <div class="esquerda">
+                  <a class="home" href=@{HomeR}>
+                     <img src="https://i.imgur.com/c6K3Xyj.png" alt="logo">
+
+               <div>
+                  <nav class="direita">
+                     $maybe email <- sess
+                        <div class="conta">
+                           <p>
+                              Logado como: #{email}
+                           <form method=post action=@{SairR}>
+                              <input class="aButton" type="submit" value="Sair">
+                     $nothing
+                        <a class="aButton" href=@{UsuarioR}>
+                           Criar Conta 
+                  
+                        <a class="aButton" href=@{EntrarR}>
+                           Entrar
+                     
+                     <a class="aButton" href=@{ListProdAdmR}>
+                        Ver Funkos 
+
+                   
+
+            <main>
+               <h2>
+                  Funkos disponíveis
+
+               <div id=centralizado>
+                  <table>
+                     <thead>
+                        <tr>
+                           <th>
+                              Nome
+
+                           <th>
+                              Franquia
+
+                           <th>
+                              Serial Number
+
+                           <th>
+                              Preço
+
+                           <th>
+
+                           <th>
+
+                     <tbody>
+                        $forall Entity pid prod <- produtos
+                           <tr>
+                              <td>
+                                 <a href=@{DescR pid}>
+                                    #{produtoNome prod}
+                              
+                              <td>
+                                 #{produtoFranquia prod}
+                              
+                              <td>
+                                 #{produtoSerialNumber prod}
+                              
+                              <td>
+                                 #{produtoPreco prod}
+
                               <td>
                                  <a href=@{UpdProdR pid}>
                                     Editar

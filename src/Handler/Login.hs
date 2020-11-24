@@ -175,4 +175,8 @@ getAdminR = defaultLayout $ do
 
             <h1>
                 BEM-VINDO ADMIN
+
+            <li>
+               <a class="aButton" href=@{ListProdAdmR}>
+                  Listar Funkos
     |]

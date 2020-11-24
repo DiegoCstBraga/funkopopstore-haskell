@@ -9,7 +9,7 @@
 /produtos                   ListProdR  GET
 /produto/#ProdutoId/modifica UpdProdR  GET POST
 /produto/#ProdutoId/del      DelProdR  POST
-
+/produtosAdmin              ListProdAdmR GET
 /usuario                    UsuarioR   GET POST
 
 /login                      EntrarR    GET POST
