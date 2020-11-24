@@ -463,10 +463,10 @@ getListProdR = do
                                  #{produtoFranquia prod}
                               
                               <td>
-                                 #{produtoSerialNumber prod}
+                                 ##{produtoSerialNumber prod}
                               
                               <td>
-                                 #{produtoPreco prod}
+                                 R$ #{produtoPreco prod}
 
       |]
 
@@ -644,10 +644,10 @@ getListProdAdmR = do
                                  #{produtoFranquia prod}
                               
                               <td>
-                                 #{produtoSerialNumber prod}
+                                 ##{produtoSerialNumber prod}
                               
                               <td>
-                                 #{produtoPreco prod}
+                                 R$ #{produtoPreco prod}
 
                               <td>
                                  <a href=@{UpdProdR pid}>
